@@ -1,119 +1,101 @@
 {
-    class Movie
+    class Program
     {
-        public String Title { get; private set; }
-        public String Description { get; private set; }
-        public String Rating { get; private set; }
-        public String Length { get; private set; }
+        private Maze maze = new Maze();
+        Hero curby = new Hero();
 
-        public Movie(String title, String description, String rating, String length)
+        public void Play()
         {
-            this.Title = title;
-            this.Description = description;
-            this.Rating = rating;
-            this.Length = length;
-        }
+            Boolean play = true;
 
-    }
-}
-
-using System.IO;
-
-namespace WindowsFormsApplication1
-{
-    class MovieList
-    {
-        private List<Movie> movies = new List<Movie>();
-
-        public MovieList(String fileName)
-        {
-            Load(fileName);
-        }
-
-        private void Load(String fileName)
-        {
-            StreamReader fileIn = new StreamReader(fileName);
-
-            while (!fileIn.EndOfStream)
+            do
             {
-                //String title = fileIn.ReadLine().Trim();
-                String[] description = fileIn.ReadLine().Split(':'); //null error
-               // String[] rating = fileIn.ReadLine().Split(':');
-               // String[] length = fileIn.ReadLine().Split(':');
+                Console.Clear();
+                maze.Draw(curby);
 
-                Movie tempMovie = new Movie(description[0], description[1], description[2], description[3]);
-                movies.Add(tempMovie);
-            }
+                MoveHero();
 
-            fileIn.Close();
-        }
-
-        public List<String> GetMovieNames()
-        {
-            List<String> names = new List<String>();
-
-            foreach (Movie item in movies)
-            {
-                names.Add(item.Title);
-            }
-
-            return names;
-        }
-
-        public Movie GetMovie(String title)
-        {
-            foreach (Movie item in movies)
-            {
-                if (item.Title.ToLower().Trim() == title.ToLower().Trim())
+                if (maze.IsEnd(curby.GetX(), curby.GetY()))
                 {
-                    return item;
+                    if (maze.AreMoreLevels())
+                    {
+                        curby.Reset();
+                        maze.NextLevel();
+                    }
+
+                    else play = false;
                 }
-            }
 
-            return null;
-        }
-    }
-}
+            } while (play == true);
 
-
-namespace WindowsFormsApplication1
-{
-    public partial class FormMovie : Form
-    {
-        MovieList myMovies = new MovieList("movies.txt");
-        
-        public FormMovie()
-        {
-            InitializeComponent();
+            Console.Clear();
+            Goodbye();
+            
         }
 
-        private void FormMovie_Load(object sender, EventArgs e)
+        public void MoveHero()
         {
-            List<String> names = myMovies.GetMovieNames();
+            //setups ability to read the arrow keys
+            ConsoleKeyInfo readKey = Console.ReadKey(true);
 
-            //loop through names and add them to combo box
-            foreach (String title in names)
+            if (readKey.Key == ConsoleKey.RightArrow &&
+                maze.PointIsFree(curby.GetX() + 1, curby.GetY()))   //if they entered the right key
             {
-                cmbMovieName.Items.Add(title);
+                curby.MoveRight();
             }
-        }
+            else if (readKey.Key == ConsoleKey.LeftArrow &&
+                maze.PointIsFree(curby.GetX() - 1, curby.GetY()))
+            {
+                curby.MoveLeft();
+            }
+            else if (readKey.Key == ConsoleKey.UpArrow &&
+                maze.PointIsFree(curby.GetX(), curby.GetY() - 1))
+            {
+                curby.MoveUp();
+            }
+            else if (readKey.Key == ConsoleKey.DownArrow &&
+                maze.PointIsFree(curby.GetX(), curby.GetY() + 1))
+            {
+                curby.MoveDown();
+            }
+            else
+            {
+                Console.Beep();
+                
+                String bumpSound = @"smb3_bump.wav";
+                var sound1 = new System.Media.SoundPlayer(bumpSound);
+                sound1.PlaySync(); 
+            }
 
-        private void cmbMovieName_SelectedIndexChanged(object sender, EventArgs e)
+            if (maze.PointIsMoney(curby.GetX(), curby.GetY()))
+            {
+                curby.AddScore();
+                maze.RemoveMoney(curby.GetX(), curby.GetY());
+
+                String coinSound = @"smb3_coin.wav";
+               var sound2 = new System.Media.SoundPlayer(coinSound);
+               sound2.PlaySync(); 
+                
+            }
+
+        public void Goodbye()
         {
-            String title = cmbMovieName.SelectedItem.ToString();
-            Movie myMovie = myMovies.GetMovie(title);
-
-            rtxtDescription.Text= myMovie.Description;
-            rtxtMovieTitle.Text = myMovie.Title;
-            rtxtRating.Text = myMovie.Rating;
-            rtxtLength.Text = myMovie.Length;
+            Console.WriteLine("\nDid you ever know that you're my hero?");
+            Console.WriteLine("\nAnd everything I would like to be?");
+            Console.WriteLine("\nI can fly higher than a seagull.");
+            Console.WriteLine("\nBecause you are the ... the ... the ...");
+            Console.WriteLine("\nHuh, I forgot how that goes. Anyway, congrats on reaching the end of the game.");
+            Console.WriteLine("\nHere's a smiley face for you troubles: :-)");
+            Console.WriteLine("\nAnd I suppose you want to know your score as well.");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\nYou can tell your friends this is how well you did: " + curby.GetScore() + ", as in that many points.");   
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        static void Main(string[] args)
         {
-
+            Program program = new Program();
+            program.Play();
+            Console.ReadLine();
         }
-
     }
 }
-
