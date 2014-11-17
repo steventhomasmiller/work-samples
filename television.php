@@ -8,21 +8,21 @@
 				<div class="channel" style="margin-bottom: 30px;"><img alt="key_art_biography" src="http://henrynevisonproductions.com/wp-content/uploads/2013/09/key_art_biography-e1379523442593-300x103.jpg" width="210" height="72" /></p>
 					</div>
 
-				<div id="video" style="margin-bottom: 50px;">
-				<h3>Elizabeth Hurley</h3>
-				<p><iframe src="//player.vimeo.com/video/75397244" width="640" height="360" 
-				frameborder="0" title="&quot;Elizabeth Hurley: Famous for Being Famous&quot; (3 minute excerpt)" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></p>
-			</div>
-			
-				<div id="video" style="margin-bottom: 50px;">
-				<h3>Eric Clapton</h3>
-				<p><iframe src="//player.vimeo.com/video/75395364" width="640" height="360" frameborder="0" title="Eric Clapton: &quot;Only the Messenger&quot;  (3 minute excerpt)" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></p>
-			</div>
-			
-				<div id="video" style="margin-bottom: 50px;">
-				<h3>Pete Townsend</h3>
-				<p><iframe src="//player.vimeo.com/video/75396226" width="640" height="360" frameborder="0" title="Pete Townsend: &quot;Can&#039;t Explain&quot; (3 minute excerpt)" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></p>
+					<div id="video" style="margin-bottom: 50px;">
+					<h3>Elizabeth Hurley</h3>
+					<p><iframe src="//player.vimeo.com/video/75397244" width="640" height="360" 
+					frameborder="0" title="&quot;Elizabeth Hurley: Famous for Being Famous&quot; (3 minute excerpt)" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></p>
 				</div>
+				
+					<div id="video" style="margin-bottom: 50px;">
+					<h3>Eric Clapton</h3>
+					<p><iframe src="//player.vimeo.com/video/75395364" width="640" height="360" frameborder="0" title="Eric Clapton: &quot;Only the Messenger&quot;  (3 minute excerpt)" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></p>
+				</div>
+				
+					<div id="video" style="margin-bottom: 50px;">
+					<h3>Pete Townsend</h3>
+					<p><iframe src="//player.vimeo.com/video/75396226" width="640" height="360" frameborder="0" title="Pete Townsend: &quot;Can&#039;t Explain&quot; (3 minute excerpt)" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></p>
+					</div>
 
 			<div class="section" style="margin-bottom: 100px;">
 			
